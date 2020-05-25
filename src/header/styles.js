@@ -6,6 +6,7 @@ export const Container = styled.header`
   align-items: center;
   max-height: 365px;
   width: 100vw;
+  color: #fff;
 
   strong {
     font-size: 24px;
@@ -28,6 +29,7 @@ export const Container = styled.header`
       margin: 1px 10px;
       text-decoration: none;
       transition: scale 0.1s;
+      color: #fff;
 
       svg {
         width: 18px;
