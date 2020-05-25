@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { GoPrimitiveDot } from 'react-icons/go';
 import { Container, Repositories } from './styles';
-import repos from '../tmp/repos';
+// import repos from '../tmp/repos';
 import languageColor from '../util/languageColor';
+import api from '../services/api';
 
 const Body = () => {
   const [repositories, setRepositories] = useState([]);
+  const [sortedRepositories, setSortedRepositories] = useState([]);
 
   useEffect(() => {
-    const sortedRepos = repos.sort((a, b) => {
+    api.get('/repos').then((response) => {
+      setRepositories(response.data);
+    });
+
+    const sortedRepos = repositories.sort((a, b) => {
       if (a.updated_at > b.updated_at) {
         return -1;
       }
@@ -17,16 +23,15 @@ const Body = () => {
       }
       return 0;
     });
-
-    setRepositories(sortedRepos);
-  }, []);
+    setSortedRepositories(sortedRepos);
+  }, [repositories]);
 
   return (
     <Container>
       <strong>Projetos</strong>
       <p>Projetos que criei e/ou participei</p>
       <Repositories>
-        {repositories.map((repo) => (
+        {sortedRepositories.map((repo) => (
           <a key={repo.id} href={repo.html_url}>
             {repo.full_name}
             {repo.description && <span>{repo.description}</span>}
