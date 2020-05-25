@@ -7,6 +7,10 @@ export const Container = styled.header`
   max-height: 365px;
   width: 100vw;
 
+  strong {
+    font-size: 24px;
+  }
+
   img {
     margin-top: 40px;
     margin-bottom: 8px;
